@@ -11,10 +11,12 @@ import {
 } from "@tremor/react";
 
 import { useAppSelector } from "../hooks/store.ts";
+import { useUserActions } from "../hooks/useUserActions.ts";
 import { deleteIcon, editIcon } from "../utils/Icons.tsx";
 
 export default function ListOfUsers() {
 	const users = useAppSelector((state) => state.users);
+	const { removeUser } = useUserActions();
 
 	return (
 		<Card>
@@ -59,7 +61,9 @@ export default function ListOfUsers() {
 							<TableCell>{item.email}</TableCell>
 							<TableCell>
 								<button type="button">{editIcon}</button>
-								<button type="button">{deleteIcon}</button>
+								<button type="button" onClick={() => removeUser(item.id)}>
+									{deleteIcon}
+								</button>
 							</TableCell>
 						</TableRow>
 					))}
