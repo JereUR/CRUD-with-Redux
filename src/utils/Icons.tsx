@@ -7,6 +7,7 @@ export const deleteIcon = (
 		strokeWidth={1.5}
 		stroke="currentColor"
 		className="w-6 h-6"
+		aria-label="Remove element"
 	>
 		<path
 			strokeLinecap="round"
@@ -25,6 +26,7 @@ export const editIcon = (
 		strokeWidth={1.5}
 		stroke="currentColor"
 		className="w-6 h-6"
+		aria-label="Edit element"
 	>
 		<path
 			strokeLinecap="round"
