@@ -10,35 +10,12 @@ import {
 	Title,
 } from "@tremor/react";
 
-import { deleteIcon, editIcon } from "../utils/Icons.jsx";
-
-const users: {
-	id: string;
-	name: string;
-	email: string;
-	github: string;
-}[] = [
-	{
-		id: "1",
-		name: "JereUR",
-		email: "jereur@example.com",
-		github: "https://github.com/JereUR",
-	},
-	{
-		id: "2",
-		name: "leanlibutti",
-		email: "leanlibutti@example.com",
-		github: "https://github.com/leanlibutti",
-	},
-	{
-		id: "3",
-		name: "example",
-		email: "example@example.com",
-		github: "https://github.com/example",
-	},
-];
+import { useAppSelector } from "../hooks/store.ts";
+import { deleteIcon, editIcon } from "../utils/Icons.tsx";
 
 export default function ListOfUsers() {
+	const users = useAppSelector((state) => state.users);
+
 	return (
 		<Card>
 			<Title>
@@ -51,7 +28,6 @@ export default function ListOfUsers() {
 					{users.length}
 				</Badge>
 			</Title>
-
 			<Table>
 				<TableHead>
 					<TableRow>
@@ -66,17 +42,19 @@ export default function ListOfUsers() {
 						<TableRow key={item.id}>
 							<TableCell>{item.id}</TableCell>
 							<TableCell style={{ display: "flex", alignItems: "center" }}>
-								<img
-									src={`https://unavatar.io/github/${item.name}`}
-									alt={item.name}
-									style={{
-										width: "32px",
-										height: "32px",
-										borderRadius: "50%",
-										marginRight: "8px",
-									}}
-								/>
-								{item.name}
+								<>
+									<img
+										src={`https://unavatar.io/github/${item.github}`}
+										alt={item.name}
+										style={{
+											width: "32px",
+											height: "32px",
+											borderRadius: "50%",
+											marginRight: "8px",
+										}}
+									/>
+									{item.name}
+								</>
 							</TableCell>
 							<TableCell>{item.email}</TableCell>
 							<TableCell>
