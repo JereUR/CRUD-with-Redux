@@ -20,8 +20,8 @@ export default function ListOfUsers() {
 
 	return (
 		<Card>
-			<Title>
-				Usuarios
+			<div className="flex">
+				<Title>Usuarios</Title>
 				<Badge
 					style={{
 						marginLeft: "8px",
@@ -29,7 +29,7 @@ export default function ListOfUsers() {
 				>
 					{users.length}
 				</Badge>
-			</Title>
+			</div>
 			<Table>
 				<TableHead>
 					<TableRow>
