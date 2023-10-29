@@ -1,4 +1,5 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
+import { User } from "./slice";
 
 const DEFAULT_STATE = [
 	{
@@ -44,13 +45,21 @@ export const usersSlice = createSlice({
 	reducers: {
 		addNewUser: (state, action: PayloadAction<User>) => {
 			const id = crypto.randomUUID();
-			return [...state, { id, ...action.payload }];
+			state.push({ id, ...action.payload });
 		},
 		deleteUserById: (state, action: PayloadAction<UserId>) => {
 			return state.filter((user) => user.id !== action.payload);
+		},
+		rollbackUser: (state, action: PayloadAction<UserWithId>) => {
+			const isUserAlreadyDefined = state.some(
+				(user) => user.id === action.payload.id,
+			);
+			if (!isUserAlreadyDefined) {
+				state.push(action.payload);
+			}
 		},
 	},
 });
 
 export default usersSlice.reducer;
-export const { deleteUserById, addNewUser } = usersSlice.actions;
+export const { deleteUserById, addNewUser, rollbackUser } = usersSlice.actions;
